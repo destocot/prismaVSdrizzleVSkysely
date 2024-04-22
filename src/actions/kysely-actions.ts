@@ -5,8 +5,12 @@ import { performance } from "perf_hooks";
 export async function getUsers() {
   const startTime = performance.now();
 
-  await kysely.selectFrom("users").selectAll().execute();
-  // .then((res) => console.log(res));
+  await kysely
+    .selectFrom("users")
+    .selectAll()
+    .execute()
+    // .then((res) => console.log(res));
+    .catch((err) => console.log(err));
 
   const endTime = performance.now();
 

@@ -7,6 +7,8 @@ import {
 } from "@/actions/drizzle-actions";
 import { Card } from "./card";
 import { useState } from "react";
+import { useMdStore } from "@/lib/store";
+import drizzleMarkdown from "@/actions/drizzle-actions-markdown";
 
 type DrizzleCardsProps = {
   userId: string;
@@ -15,6 +17,7 @@ type DrizzleCardsProps = {
 export const DrizzleCards = ({ userId }: DrizzleCardsProps) => {
   const [requestType, setRequestType] = useState("");
   const [perfTime, setPerfTime] = useState<number | null>(null);
+  const setMarkdown = useMdStore((state) => state.setMarkdown);
 
   return (
     <section className="p-2 space-y-2 border-b border-zinc-50/5 ">
@@ -27,6 +30,7 @@ export const DrizzleCards = ({ userId }: DrizzleCardsProps) => {
             const res = await getUsers();
             setRequestType("GET ALL USERS");
             setPerfTime(res);
+            setMarkdown(drizzleMarkdown.getUsers);
           }}
         />
         <Card
@@ -36,6 +40,7 @@ export const DrizzleCards = ({ userId }: DrizzleCardsProps) => {
             const res = await getUserById(userId);
             setRequestType(`GET USER WHERE ID = ${userId}`);
             setPerfTime(res);
+            setMarkdown(drizzleMarkdown.getUserById);
           }}
         />
         <Card
@@ -45,6 +50,7 @@ export const DrizzleCards = ({ userId }: DrizzleCardsProps) => {
             const res = await getUsersWithPosts();
             setRequestType(`GET ALL USERS WITH POSTS`);
             setPerfTime(res);
+            setMarkdown(drizzleMarkdown.getUsersWithPosts);
           }}
         />
         <Card
@@ -54,6 +60,7 @@ export const DrizzleCards = ({ userId }: DrizzleCardsProps) => {
             const res = await getUserByIdWithPosts(userId);
             setRequestType(`GET USERS WHERE ID = ${userId} WITH POSTS`);
             setPerfTime(res);
+            setMarkdown(drizzleMarkdown.getUserByIdWithPosts);
           }}
         />
       </div>
