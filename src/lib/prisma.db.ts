@@ -10,7 +10,10 @@ const pool = new Pool({ connectionString });
 const adapter = new PrismaNeon(pool);
 
 const prismaClientSingleton = () => {
-  return new PrismaClient({ adapter, log: ["query"] });
+  return new PrismaClient({
+    adapter,
+    // log: ["query"]
+  });
 };
 
 declare global {

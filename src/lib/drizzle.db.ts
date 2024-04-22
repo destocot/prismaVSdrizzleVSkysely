@@ -7,7 +7,10 @@ const connectionString = `${process.env.DATABASE_URL}`;
 const pool = new Pool({ connectionString });
 
 const drizzleClientSingleton = () => {
-  return DrizzleClient(pool, { schema, logger: true });
+  return DrizzleClient(pool, {
+    schema,
+    // logger: true
+  });
 };
 
 declare global {
