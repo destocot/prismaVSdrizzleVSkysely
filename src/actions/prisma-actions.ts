@@ -6,9 +6,13 @@ import { performance } from "perf_hooks";
 export async function getUsers() {
   const startTime = performance.now();
 
-  await prisma.users.findMany();
-  // .then((res) => console.log(res));
+  console.log("HERE PRIS 1");
+  await prisma.users
+    .findMany()
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 
+  console.log("HERE PRIS 2");
   const endTime = performance.now();
 
   return endTime - startTime;
