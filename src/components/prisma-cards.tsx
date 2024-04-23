@@ -8,12 +8,15 @@ import {
 import { Card } from "./card";
 import { users } from "@prisma/client";
 import { useState } from "react";
+import { useMdStore } from "@/lib/store";
+import prismaMarkdown from "@/actions/prisma-actions-markdown";
 
 type PrismaCardsProps = { userId: users["id"] };
 
 export const PrismaCards = ({ userId }: PrismaCardsProps) => {
   const [requestType, setRequestType] = useState("");
   const [perfTime, setPerfTime] = useState<number | null>(null);
+  const setMarkdown = useMdStore((state) => state.setMarkdown);
 
   return (
     <section className="p-2 space-y-2 border-b border-zinc-50/5 ">
@@ -23,11 +26,10 @@ export const PrismaCards = ({ userId }: PrismaCardsProps) => {
           title="get users"
           db="prisma"
           action={async () => {
-            console.log("[prisma cards] get users");
             const res = await getUsers();
-            console.log("[prisma cards] get users res");
             setRequestType("GET ALL USERS");
             setPerfTime(res);
+            setMarkdown(prismaMarkdown.getUsers);
           }}
         />
         <Card
@@ -37,6 +39,7 @@ export const PrismaCards = ({ userId }: PrismaCardsProps) => {
             const res = await getUserById(userId);
             setRequestType(`GET USER WHERE ID = ${userId}`);
             setPerfTime(res);
+            setMarkdown(prismaMarkdown.getUserById);
           }}
         />
         <Card
@@ -46,6 +49,7 @@ export const PrismaCards = ({ userId }: PrismaCardsProps) => {
             const res = await getUsersWithPosts();
             setRequestType(`GET ALL USERS WITH POSTS`);
             setPerfTime(res);
+            setMarkdown(prismaMarkdown.getUsersWithPosts);
           }}
         />
         <Card
@@ -55,6 +59,7 @@ export const PrismaCards = ({ userId }: PrismaCardsProps) => {
             const res = await getUserByIdWithPosts(userId);
             setRequestType(`GET USERS WHERE ID = ${userId} WITH POSTS`);
             setPerfTime(res);
+            setMarkdown(prismaMarkdown.getUserByIdWithPosts);
           }}
         />
       </div>
