@@ -4,16 +4,12 @@ import { users } from "@prisma/client";
 import { performance } from "perf_hooks";
 
 export async function getUsers() {
-  console.log("[prisma actions] startTime");
   const startTime = performance.now();
 
-  console.log("[prisma actions] prisma.users.findMany()");
   await prisma.users.findMany();
 
-  console.log("[prisma actions] endTime");
   const endTime = performance.now();
 
-  console.log("[prisma actions] return");
   return endTime - startTime;
 }
 
