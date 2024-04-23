@@ -5,12 +5,7 @@ import { performance } from "perf_hooks";
 export async function getUsers() {
   const startTime = performance.now();
 
-  await kysely
-    .selectFrom("users")
-    .selectAll()
-    .execute()
-    // .then((res) => console.log(res));
-    .catch((err) => console.log(err));
+  await kysely.selectFrom("users").selectAll().execute();
 
   const endTime = performance.now();
 
@@ -25,7 +20,6 @@ export async function getUserById(id: string) {
     .where("id", "=", id)
     .selectAll()
     .executeTakeFirst();
-  // .then((res) => console.log(res));
 
   const endTime = performance.now();
 
@@ -40,7 +34,6 @@ export async function getUsersWithPosts() {
     .innerJoin("posts", "users.id", "posts.author_id")
     .selectAll()
     .execute();
-  // .then((res) => console.log(res));
 
   const endTime = performance.now();
 
@@ -56,7 +49,6 @@ export async function getUserByIdWithPosts(id: string) {
     .innerJoin("posts", "users.id", "posts.author_id")
     .selectAll()
     .execute();
-  // .then((res) => console.log(res));
 
   const endTime = performance.now();
 

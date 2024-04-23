@@ -8,7 +8,6 @@ export async function getUsers() {
   const startTime = performance.now();
 
   await drizzle.select().from(users);
-  // .then((res) => console.log(res));
 
   const endTime = performance.now();
 
@@ -19,7 +18,6 @@ export async function getUserById(id: string) {
   const startTime = performance.now();
 
   await drizzle.select().from(users).where(eq(users.id, id));
-  // .then((res) => console.log(res));
 
   const endTime = performance.now();
 
@@ -33,7 +31,6 @@ export async function getUsersWithPosts() {
     .select()
     .from(users)
     .leftJoin(posts, eq(users.id, posts.authorId));
-  // .then((res) => console.log(res));
 
   const endTime = performance.now();
 
@@ -44,11 +41,10 @@ export async function getUserByIdWithPosts(id: string) {
   const startTime = performance.now();
 
   await drizzle
-    .select({ users: { ...users, posts } })
+    .select()
     .from(users)
     .where(eq(users.id, id))
     .leftJoin(posts, eq(users.id, posts.authorId));
-  // .then((res) => console.log(res));
 
   const endTime = performance.now();
 

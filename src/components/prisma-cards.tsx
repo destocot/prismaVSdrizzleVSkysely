@@ -23,7 +23,9 @@ export const PrismaCards = ({ userId }: PrismaCardsProps) => {
           title="get users"
           db="prisma"
           action={async () => {
+            console.log("[prisma cards] get users");
             const res = await getUsers();
+            console.log("[prisma cards] get users res");
             setRequestType("GET ALL USERS");
             setPerfTime(res);
           }}

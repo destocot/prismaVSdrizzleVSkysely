@@ -1,9 +1,14 @@
 const getUsers = `
-  await drizzle.select().from(users);
+  await drizzle
+    .select()
+    .from(users);
   `;
 
 const getUserById = `
-  await drizzle.select().from(users).where(eq(users.id, id));
+  await drizzle
+    .select()
+    .from(users)
+    .where(eq(users.id, id));
   `;
 
 const getUsersWithPosts = `
@@ -15,7 +20,7 @@ const getUsersWithPosts = `
 
 const getUserByIdWithPosts = `
   await drizzle
-    .select({ users: { ...users, posts } })
+    .select()
     .from(users)
     .where(eq(users.id, id))
     .leftJoin(posts, eq(users.id, posts.authorId));
